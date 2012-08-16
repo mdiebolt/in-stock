@@ -1,3 +1,9 @@
 %h1 Inventory
 
-%h4 Add items
+.item_manager
+
+:coffeescript
+  $ ->
+    view = new InStock.Views.ItemManager
+
+    $('.item_manager').replaceWith view.render().$el
