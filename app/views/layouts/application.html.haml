@@ -9,4 +9,12 @@
   %p.notice= notice
   %p.alert= alert
 
+  .login_info
+    -if current_user
+      %span You are logged in as #{current_user.display_name}
+      |
+      = link_to "Sign out", destroy_session_path(current_user), :method => :delete
+    -else
+      = link_to "Sign in", new_user_session_path
+
   = yield
