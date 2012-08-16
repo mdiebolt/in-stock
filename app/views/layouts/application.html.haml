@@ -6,8 +6,8 @@
   = javascript_include_tag "application"
   = csrf_meta_tags
 %body
-  %p.notice= notice
-  %p.alert= alert
+  .flashes
+    %p.alert= notice || alert
 
   .login_info
     -if current_user
