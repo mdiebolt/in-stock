@@ -7,5 +7,8 @@ namespace "InStock.Models", (Models) ->
   class Models.ItemsCollection extends Backbone.Collection
     model: Models.Item
 
+    comparator: (item) ->
+      -new Date(item.get('created_at')).getTime()
+
     url: ->
       '/items'

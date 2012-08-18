@@ -5,14 +5,33 @@ namespace "InStock.Views", (Views) ->
     className: 'item_manager'
 
     events:
-      'click .add' : 'add'
+      'click .add' : 'create'
 
-    add: =>
-      model = new InStock.Models.Item
+    initialize: ->
+      @collection = new InStock.Models.ItemsCollection
+
+      @collection.on 'reset', (c) =>
+        c.each(@add)
+
+      @collection.fetch()
+
+    create: =>
+      model = @collection.create()
+
+      @add(model)
+
+    add: (model) =>
       view = new InStock.Views.Item
         model: model
 
-      @$('.items').append(view.render().$el)
+      el = view.render().$el
+
+      @$('.items').append(el)
+
+      # css transitions
+      _.defer ->
+        el.css
+          opacity: 1
 
     render: =>
       @$el.html JST['item_manager']()

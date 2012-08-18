@@ -1,4 +1,7 @@
-%h1= @name
+%h3.name(contentEditable='true')= @name
 %p
   Quantity:
-  = @quantity
+  %input.quantity(type='number' value="#{@quantity}")
+.btn-toolbar
+  %button.btn.save Save
+  %button.btn.btn-danger.remove Remove
