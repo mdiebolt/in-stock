@@ -1,3 +1,10 @@
+# Sample shopping cart request
+# req = Amazon.api.build
+#   'Operation' => 'CartCreate',
+#   'Item.1.Quantity' => 1,
+#   'Item.1.OfferListingId' => '0001846655',
+#   'AssociateTag' => AMAZON_CONFIG['tag'
+
 require 'amazon'
 
 class ItemsController < ApplicationController
