@@ -1,7 +1,19 @@
-%h3.name(contentEditable='true')= @name
-%p
-  Quantity:
-  %input.quantity(type='number' value="#{@quantity}")
+%h3.inline.name(contentEditable='true')= @name
+- if @image_url
+  %img(src="#{@image_url}")
+%label
+  %h4 I have
+  %input.quantity(type='number' min='0' value="#{@quantity}")
+%label
+  %h4 Reorder when I have fewer than
+  %input.reorder_threshold(type='number' min='2' value="#{@reorder_threshold}")
+
 .btn-toolbar
   %button.btn.save Save
   %button.btn.btn-danger.remove Remove
+.control-group
+  %h3 Search Amazon for items to order
+  %label
+  .control-group
+    %input.search_term(type='text' placeholder='search')
+    %button.btn.search.top Search

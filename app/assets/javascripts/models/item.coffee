@@ -3,6 +3,7 @@ namespace "InStock.Models", (Models) ->
     defaults:
       name: 'New Item'
       quantity: 0
+      reorder_threshold: 2
 
   class Models.ItemsCollection extends Backbone.Collection
     model: Models.Item

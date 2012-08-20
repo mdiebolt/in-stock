@@ -11,7 +11,7 @@
 
   .login_info
     -if current_user
-      %span You are logged in as #{current_user.display_name}
+      %span Logged in as #{current_user.display_name}
       |
       = link_to "Sign out", destroy_session_path(current_user), :method => :delete
     -else

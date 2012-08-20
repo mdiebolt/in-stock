@@ -1,5 +1,8 @@
 #= require templates/item
 
+namespace "InStock.ItemManager", (ItemManager) ->
+  ItemManager.eventBus = _.extend({}, Backbone.Events)
+
 namespace "InStock.Views", (Views) ->
   class Views.ItemManager extends Backbone.View
     className: 'item_manager'

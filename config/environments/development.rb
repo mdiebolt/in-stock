@@ -1,3 +1,11 @@
+amazon_config_path = "#{Rails.root}/config/dev_amazon_credentials.yml"
+
+if File.exists? amazon_config_path
+  AMAZON_CONFIG = HashWithIndifferentAccess.new YAML.load_file(amazon_config_path)
+else
+  AMAZON_CONFIG = {}
+end
+
 InStock::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
