@@ -9,6 +9,7 @@ namespace "InStock.Views", (Views) ->
 
     events:
       'click .add' : 'create'
+      'click .order': 'placeOrder'
 
     initialize: ->
       @collection = new InStock.Models.ItemsCollection
@@ -35,6 +36,10 @@ namespace "InStock.Views", (Views) ->
       _.defer ->
         el.css
           opacity: 1
+
+    placeOrder: ->
+      $.getJSON '/items/order', (data) ->
+        $('body').append("<a href='#{data.purchase_url}'>Place Order</a>")
 
     render: =>
       @$el.html JST['item_manager']()

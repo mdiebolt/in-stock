@@ -1,10 +1,3 @@
-# Sample shopping cart request
-# req = Amazon.api.build
-#   'Operation' => 'CartCreate',
-#   'Item.1.Quantity' => 1,
-#   'Item.1.OfferListingId' => '0001846655',
-#   'AssociateTag' => AMAZON_CONFIG['tag'
-
 require 'amazon'
 
 class ItemsController < ApplicationController
@@ -42,6 +35,26 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.json do
         render :json => { :status => "ok" }
+      end
+    end
+  end
+
+  def order
+    req = Amazon.add_to_cart(
+      [{
+        'ASIN' => 'B004VGSVHS', 'Quantity' => 1},
+        {'ASIN' => 'B001ET73CO', 'Quantity' => 2}
+      ])
+
+    res = req.get
+
+    purchase_url = res.find('PurchaseURL').first
+
+    respond_to do |format|
+      format.json do
+        render :json => {
+          :purchase_url => purchase_url
+        }
       end
     end
   end

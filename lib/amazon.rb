@@ -14,14 +14,27 @@ module Amazon
     @api ||= self.init
   end
 
-  def self.add_to_cart(amazon_id, quantity)
-    req = Amazon.api.build(
-      'Operation' => 'CartCreate',
-      'Item.1.Quantity' => quantity,
-      'Item.1.ASIN' => amazon_id,
-      'AssociateTag' => AMAZON_CONFIG['tag']
-    )
+  # TODO: call this with all the items that are below the buying threshold
+  def self.add_to_cart(items)
+    items_data = create_items_request(items)
+
+    req = Amazon.api.build(items_data)
 
     req
+  end
+
+  private
+  def self.create_items_request(items)
+    items_request = {
+      'Operation' => 'CartCreate',
+      'AssociateTag' => AMAZON_CONFIG['tag'],
+    }
+
+    items.each_with_index do |item, index|
+      items_request["Item.#{index + 1}.ASIN"] = item['ASIN']
+      items_request["Item.#{index + 1}.Quantity"] = item['Quantity']
+    end
+
+    items_request
   end
 end

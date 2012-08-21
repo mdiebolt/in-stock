@@ -1,3 +1,4 @@
 %h1.inline Inventory
 .btn.btn-primary.add Add
 .items
+.btn.btn-success.order Order

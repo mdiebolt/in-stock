@@ -2,6 +2,7 @@ InStock::Application.routes.draw do
   resources :items do
     collection do
       get :search
+      get :order
     end
   end
 
